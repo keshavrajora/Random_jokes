@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9Uig2V8ZkdCPr93ookcCSpTrhf7LYmXW59ufeuERb9d3xZnE2Mi7XH3uWCg&s">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="css/style.css" /> -->
+    <title>Random Jokes</title>
+    <style>
+      * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Rubik", sans-serif;
+}
+
+body {
+    background-image: url(https://img.freepik.com/premium-photo/smoke-frame-3d-illustration_115548-18.jpg?w=360);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+}
+
+
+.wrapper {
+    width: 80vmin;
+    padding: 50px 40px;
+    border: 3px solid rgb(54, 51, 51);
+    background-color: transparent;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px; 
+    box-shadow: 20px 20px 40px rgba(97, 63, 0, 0.4); 
+}
+
+span {
+    display: block;
+    text-align: center;
+    font-size: 100px;
+    color: #ffffff; 
+}
+
+p {
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 400;
+    text-align: center;
+    word-wrap: break-word;
+    line-height: 35px;
+    margin: 30px 0;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out; 
+}
+
+.fade {
+    opacity: 1;
+}
+
+button {
+    display: block;
+    background-color: #fab22e;
+    border: none;
+    color: #171721;
+    font-weight: 600;
+    padding: 12px 25px;
+    margin: 0 auto;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+
+button:hover {
+    background-color: #f9a826; 
+    transform: scale(1.05); 
+}
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <span>&#128514;</span>
+
+      <p id="joke"></p>
+      <button id="btn">Get Random Jokes</button>
+    </div>
+  </body>
+  <!-- <script src="js/script.js"></script> -->
+   <script>
+    const joke = document.querySelector("#joke");
+const btn = document.querySelector("#btn");
+const url =
+  "https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single";
+
+let randomJoke = () => {
+  joke.classList.remove("fade");
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      joke.textContent = data.joke;
+      joke.classList.add("fade");
+    })
+    .catch((error) => {
+      console.error("Error fetching joke:", error);
+    });
+};
+
+btn.addEventListener("click", randomJoke);
+
+randomJoke();
+
+   </script>
+</html>
